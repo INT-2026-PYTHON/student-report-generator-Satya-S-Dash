@@ -1,7 +1,8 @@
 """gradebook.reports — build a printable report from grade records."""
-
-# TODO: use a RELATIVE import to pull from the sibling stats module.
-# from .stats import average_per_student, subjects_offered, top_scorer, passing_students
+from .stats import average_per_student
+from .stats import subjects_offered
+from .stats import top_scorer
+from .stats import passing_students
 
 
 def format_report(records: list[dict]) -> str:
@@ -15,5 +16,15 @@ def format_report(records: list[dict]) -> str:
       - The top scorer (name + average)
       - The list of passing students (threshold 60.0)
     """
-    # TODO: implement
-    pass
+    avg = average_per_student(records)
+    passing = passing_students(records)
+    subjects = subjects_offered(records)
+    top = top_scorer(records)
+    report = {
+        "total_records": len(records),
+        "subjects": sorted(subjects),
+        "averages": avg,
+        "top_scorer": top,
+        "passing_students": passing
+    }
+    return report
