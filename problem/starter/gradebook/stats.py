@@ -16,6 +16,7 @@ def average_per_student(records: list[dict]) -> dict[str, float]:
         average = {}
     for i in total:
         average[i] = total[i] / count[i]
+    round(average,2)
     return average
 
 
